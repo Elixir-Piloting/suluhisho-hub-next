@@ -18,7 +18,7 @@ const successStories = [
     title: "Rural Water Purification System Reaches 10,000 Families",
     category: "Social Impact",
     author: "Maria Santos",
-    date: "2024-01-15",
+    date: "2025-01-15",
     readTime: "5 min read",
     image:
       "https://images.unsplash.com/photo-1541544181051-e46607bc22a4?w=400&q=80",
@@ -33,7 +33,7 @@ const successStories = [
     title: "AI-Powered Learning Tool Transforms Special Education",
     category: "Education",
     author: "Dr. James Kim",
-    date: "2024-01-10",
+    date: "2025-01-10",
     readTime: "7 min read",
     image:
       "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&q=80",
@@ -48,7 +48,7 @@ const successStories = [
     title: "Small Business Inventory Crisis Solved with Simple App",
     category: "Business",
     author: "Sarah Chen",
-    date: "2024-01-05",
+    date: "2025-01-05",
     readTime: "4 min read",
     image:
       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80",

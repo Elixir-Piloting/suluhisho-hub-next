@@ -37,8 +37,8 @@ const communityStats = [
 
 const events = [
   {
-    title: "Global Problem-Solving Summit 2024",
-    date: "March 15-17, 2024",
+    title: "Global Problem-Solving Summit 2025",
+    date: "March 15-17, 2025",
     location: "Virtual Event",
     description:
       "Join problem-solvers from around the world for three days of workshops, keynotes, and collaborative sessions.",
@@ -47,7 +47,7 @@ const events = [
   },
   {
     title: "Community Challenge: Climate Solutions",
-    date: "February 1-28, 2024",
+    date: "February 1-28, 2025",
     location: "Platform-wide",
     description:
       "A month-long collaborative effort to tackle climate change challenges with innovative solutions.",

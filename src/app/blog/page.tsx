@@ -12,7 +12,7 @@ const blogPosts = [
     excerpt:
       "Discover how diverse perspectives lead to breakthrough solutions and why collaboration beats individual effort.",
     author: "Sarah Chen",
-    date: "2024-01-15",
+    date: "2025-01-15",
     category: "Insights",
     readTime: "5 min read",
   },
@@ -22,7 +22,7 @@ const blogPosts = [
     excerpt:
       "Learn the best practices for writing challenge posts that attract quality solutions from the community.",
     author: "Marcus Johnson",
-    date: "2024-01-10",
+    date: "2025-01-10",
     category: "Tips",
     readTime: "3 min read",
   },
@@ -32,7 +32,7 @@ const blogPosts = [
     excerpt:
       "How our community helped solve critical healthcare challenges during the pandemic.",
     author: "Dr. Emily Rodriguez",
-    date: "2024-01-05",
+    date: "2025-01-05",
     category: "Success Stories",
     readTime: "7 min read",
   },

@@ -18,7 +18,7 @@ export default function PrivacyPage() {
             SolveTogether.
           </p>
           <p className="text-sm text-muted-foreground mt-4">
-            Last updated: January 2024
+            Last updated: January 2025
           </p>
         </div>
 

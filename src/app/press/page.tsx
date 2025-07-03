@@ -9,7 +9,7 @@ const pressReleases = [
   {
     id: 1,
     title: "SolveTogether Reaches 100,000 Active Problem-Solvers Milestone",
-    date: "2024-01-20",
+    date: "2025-01-20",
     excerpt:
       "Platform celebrates major growth milestone as community-driven solutions reach new heights.",
     link: "#",
@@ -18,7 +18,7 @@ const pressReleases = [
     id: 2,
     title:
       "New AI-Powered Matching System Connects Challenges with Expert Solvers",
-    date: "2024-01-10",
+    date: "2025-01-10",
     excerpt:
       "Advanced algorithm improves solution quality by 40% through better challenge-solver matching.",
     link: "#",
@@ -68,7 +68,7 @@ const mediaKit = [
 
 const awards = [
   {
-    year: "2024",
+    year: "2025",
     award: "Best Collaboration Platform",
     organization: "TechCrunch Innovation Awards",
   },
