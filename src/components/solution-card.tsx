@@ -15,6 +15,8 @@ interface Solution {
   users?: {
     full_name: string | null;
     email: string | null;
+    display_name: string | null;
+    show_name: boolean | null;
   };
   user_vote?: {
     vote_type: number;
@@ -111,9 +113,12 @@ export default function SolutionCard({
           <div className="flex items-center gap-1">
             <User className="h-4 w-4" />
             <span>
-              {solution.users?.full_name ||
-                solution.users?.email ||
-                "Anonymous"}
+              {solution.users?.show_name === false
+                ? "Anonymous"
+                : solution.users?.display_name ||
+                  solution.users?.full_name ||
+                  solution.users?.email ||
+                  "Anonymous"}
             </span>
           </div>
           <div className="flex items-center gap-1">

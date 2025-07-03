@@ -10,13 +10,11 @@ import { createClient } from "../../supabase/client";
 interface SolutionFormProps {
   challengeId: string;
   userId: string;
-  onSuccess?: () => void;
 }
 
 export default function SolutionForm({
   challengeId,
   userId,
-  onSuccess,
 }: SolutionFormProps) {
   const [content, setContent] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,7 +43,7 @@ export default function SolutionForm({
       if (error) throw error;
 
       setContent("");
-      if (onSuccess) onSuccess();
+      window.location.reload();
     } catch (error) {
       console.error("Error creating solution:", error);
       setError("Failed to submit solution. Please try again.");

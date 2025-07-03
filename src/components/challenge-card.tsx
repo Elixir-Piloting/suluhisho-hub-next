@@ -26,6 +26,8 @@ interface Challenge {
   users?: {
     full_name: string | null;
     email: string | null;
+    display_name: string | null;
+    show_name: boolean | null;
   };
   user_vote?: {
     vote_type: number;
@@ -139,9 +141,12 @@ export default function ChallengeCard({
             <div className="flex items-center gap-1">
               <User className="h-4 w-4" />
               <span>
-                {challenge.users?.full_name ||
-                  challenge.users?.email ||
-                  "Anonymous"}
+                {challenge.users?.show_name === false
+                  ? "Anonymous"
+                  : challenge.users?.display_name ||
+                    challenge.users?.full_name ||
+                    challenge.users?.email ||
+                    "Anonymous"}
               </span>
             </div>
             <div className="flex items-center gap-1">

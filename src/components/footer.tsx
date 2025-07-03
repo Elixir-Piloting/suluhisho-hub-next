@@ -49,23 +49,11 @@ export default function Footer() {
             <h3 className="font-semibold text-gray-900 mb-4">Company</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-gray-600 hover:text-blue-600">
+                <Link
+                  href="/about"
+                  className="text-gray-600 hover:text-blue-600"
+                >
                   About
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-600 hover:text-blue-600">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-600 hover:text-blue-600">
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-600 hover:text-blue-600">
-                  Press
                 </Link>
               </li>
             </ul>
@@ -76,23 +64,27 @@ export default function Footer() {
             <h3 className="font-semibold text-gray-900 mb-4">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-gray-600 hover:text-blue-600">
+                <Link
+                  href="/guidelines"
+                  className="text-gray-600 hover:text-blue-600"
+                >
                   Guidelines
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-600 hover:text-blue-600">
+                <Link
+                  href="/help"
+                  className="text-gray-600 hover:text-blue-600"
+                >
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-600 hover:text-blue-600">
+                <Link
+                  href="/community"
+                  className="text-gray-600 hover:text-blue-600"
+                >
                   Community Forum
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-600 hover:text-blue-600">
-                  Success Stories
                 </Link>
               </li>
             </ul>
@@ -103,23 +95,11 @@ export default function Footer() {
             <h3 className="font-semibold text-gray-900 mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-gray-600 hover:text-blue-600">
+                <Link
+                  href="/privacy"
+                  className="text-gray-600 hover:text-blue-600"
+                >
                   Privacy
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-600 hover:text-blue-600">
-                  Terms
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-600 hover:text-blue-600">
-                  Security
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-600 hover:text-blue-600">
-                  Cookies
                 </Link>
               </li>
             </ul>
@@ -127,11 +107,24 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-200">
-          <div className="text-gray-600 mb-4 md:mb-0">
-            © {currentYear} SolveTogether. All rights reserved.
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            <div className="text-gray-600">
+              © {currentYear} SolveTogether. All rights reserved.
+            </div>
+            <div className="text-sm text-gray-500">
+              Developed by{" "}
+              <a
+                href="https://respondly.site"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 hover:text-blue-700 underline"
+              >
+                respondly.site
+              </a>
+            </div>
           </div>
 
-          <div className="flex space-x-6">
+          <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-400 hover:text-gray-500">
               <span className="sr-only">Twitter</span>
               <Twitter className="h-6 w-6" />

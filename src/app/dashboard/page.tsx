@@ -35,11 +35,9 @@ export default async function Dashboard({
     .select(
       `
       *,
-      users!challenges_user_id_fkey(full_name, email),
-      challenge_votes!left(vote_type)
+      challenge_votes(vote_type, user_id)
     `,
     )
-    .eq("challenge_votes.user_id", user.id)
     .order("created_at", { ascending: false });
 
   // Apply search filter
@@ -60,12 +58,26 @@ export default async function Dashboard({
     console.error("Error fetching challenges:", error);
   }
 
-  // Transform challenges to include user vote
+  // Fetch user data separately
+  const userIds = challenges?.map((c) => c.user_id) || [];
+  const { data: users } = await supabase
+    .from("users")
+    .select("id, full_name, email, display_name, show_name")
+    .in("id", userIds);
+
+  // Transform challenges to include user vote and user data
   const challengesWithVotes =
-    challenges?.map((challenge) => ({
-      ...challenge,
-      user_vote: challenge.challenge_votes?.[0] || null,
-    })) || [];
+    challenges?.map((challenge) => {
+      const userData = users?.find((u) => u.id === challenge.user_id);
+      return {
+        ...challenge,
+        users: userData,
+        user_vote:
+          challenge.challenge_votes?.find(
+            (vote: any) => vote.user_id === user.id,
+          ) || null,
+      };
+    }) || [];
 
   return (
     <>

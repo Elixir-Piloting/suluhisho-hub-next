@@ -30,17 +30,22 @@ export default async function ChallengePage({
     .select(
       `
       *,
-      users!challenges_user_id_fkey(full_name, email),
-      challenge_votes!left(vote_type)
+      challenge_votes(vote_type, user_id)
     `,
     )
     .eq("id", params.id)
-    .eq("challenge_votes.user_id", user.id)
     .single();
 
   if (challengeError || !challenge) {
     notFound();
   }
+
+  // Fetch challenge author data
+  const { data: challengeUser } = await supabase
+    .from("users")
+    .select("full_name, email, display_name, show_name")
+    .eq("id", challenge.user_id)
+    .single();
 
   // Fetch solutions with user votes
   const { data: solutions, error: solutionsError } = await supabase
@@ -48,12 +53,10 @@ export default async function ChallengePage({
     .select(
       `
       *,
-      users!solutions_user_id_fkey(full_name, email),
-      solution_votes!left(vote_type)
+      solution_votes(vote_type, user_id)
     `,
     )
     .eq("challenge_id", params.id)
-    .eq("solution_votes.user_id", user.id)
     .order("votes_count", { ascending: false })
     .order("created_at", { ascending: false });
 
@@ -61,17 +64,35 @@ export default async function ChallengePage({
     console.error("Error fetching solutions:", solutionsError);
   }
 
+  // Fetch solution authors data
+  const solutionUserIds = solutions?.map((s) => s.user_id) || [];
+  const { data: solutionUsers } = await supabase
+    .from("users")
+    .select("id, full_name, email, display_name, show_name")
+    .in("id", solutionUserIds);
+
   // Transform data to include user votes
   const challengeWithVote = {
     ...challenge,
-    user_vote: challenge.challenge_votes?.[0] || null,
+    users: challengeUser,
+    user_vote:
+      challenge.challenge_votes?.find(
+        (vote: any) => vote.user_id === user.id,
+      ) || null,
   };
 
   const solutionsWithVotes =
-    solutions?.map((solution) => ({
-      ...solution,
-      user_vote: solution.solution_votes?.[0] || null,
-    })) || [];
+    solutions?.map((solution) => {
+      const userData = solutionUsers?.find((u) => u.id === solution.user_id);
+      return {
+        ...solution,
+        users: userData,
+        user_vote:
+          solution.solution_votes?.find(
+            (vote: any) => vote.user_id === user.id,
+          ) || null,
+      };
+    }) || [];
 
   return (
     <>
@@ -155,11 +176,7 @@ export default async function ChallengePage({
               </Card>
 
               {/* Solution Form */}
-              <SolutionForm
-                challengeId={params.id}
-                userId={user.id}
-                onSuccess={() => window.location.reload()}
-              />
+              <SolutionForm challengeId={params.id} userId={user.id} />
 
               {/* Solutions */}
               <div className="space-y-4">

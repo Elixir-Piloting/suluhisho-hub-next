@@ -1,5 +1,6 @@
 import DashboardNavbar from "@/components/dashboard-navbar";
 import ChallengeCard from "@/components/challenge-card";
+import ProfileSettings from "@/components/profile-settings";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UserCircle, Calendar, Trophy, MessageSquare } from "lucide-react";
@@ -23,12 +24,10 @@ export default async function ProfilePage() {
     .select(
       `
       *,
-      users!challenges_user_id_fkey(full_name, email),
-      challenge_votes!left(vote_type)
+      challenge_votes(vote_type, user_id)
     `,
     )
     .eq("user_id", user.id)
-    .eq("challenge_votes.user_id", user.id)
     .order("created_at", { ascending: false });
 
   // Fetch user's solutions with challenge info
@@ -37,7 +36,7 @@ export default async function ProfilePage() {
     .select(
       `
       *,
-      challenges!solutions_challenge_id_fkey(id, title, user_id)
+      challenges(id, title, user_id)
     `,
     )
     .eq("user_id", user.id)
@@ -57,10 +56,18 @@ export default async function ProfilePage() {
     });
   }
 
+  // Get current user data
+  const { data: currentUserData } = await supabase
+    .from("users")
+    .select("full_name, email")
+    .eq("id", user.id)
+    .single();
+
   // Transform challenges to include user vote
   const challengesWithVotes =
     userChallenges?.map((challenge) => ({
       ...challenge,
+      users: currentUserData,
       user_vote: challenge.challenge_votes?.[0] || null,
     })) || [];
 
@@ -132,13 +139,14 @@ export default async function ProfilePage() {
 
           {/* Content Tabs */}
           <Tabs defaultValue="challenges" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-6">
+            <TabsList className="grid w-full grid-cols-3 mb-6">
               <TabsTrigger value="challenges">
                 My Challenges ({totalChallenges})
               </TabsTrigger>
               <TabsTrigger value="solutions">
                 My Solutions ({totalSolutions})
               </TabsTrigger>
+              <TabsTrigger value="settings">Settings</TabsTrigger>
             </TabsList>
 
             <TabsContent value="challenges" className="space-y-6">
@@ -213,6 +221,14 @@ export default async function ProfilePage() {
                   </Card>
                 ))
               )}
+            </TabsContent>
+
+            <TabsContent value="settings" className="space-y-6">
+              <ProfileSettings
+                userId={user.id}
+                currentDisplayName={userProfile?.display_name || ""}
+                currentShowName={userProfile?.show_name ?? true}
+              />
             </TabsContent>
           </Tabs>
         </div>
