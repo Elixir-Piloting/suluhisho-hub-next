@@ -21,8 +21,8 @@
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/solvetogether.git
-cd solvetogether
+git clone https://github.com/Elixir-Piloting/suluhisho-hub-next.git
+cd suluhisho-hub-next
 ```
 
 ### 2. Install dependencies
